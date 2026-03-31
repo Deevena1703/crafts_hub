@@ -17,8 +17,6 @@ const Navbar = () => {
         <div className="navbar-links">
           <Link to="/products" className="navbar-link">Browse Products</Link>
           <Link to="/categories" className="navbar-link">Categories</Link>
-          <Link to="/buyer/dashboard" className="navbar-link">Buyer Dashboard</Link>
-          <Link to="/manufacturer/dashboard" className="navbar-link">Manufacturer Dashboard</Link>
           <button className="btn btn-outline btn-sm" onClick={() => navigate("/login")}>
             <User style={{ height: '1rem', width: '1rem' }} /> Login
           </button>
