@@ -2,7 +2,7 @@ import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
 import { products as initialProducts } from "../lib/mock-data.js";
 import { motion, AnimatePresence } from "framer-motion";
-import { Plus, Package, Mic, Video, Edit, LogOut, Upload, X, Square, Image } from "lucide-react";
+import { Plus, Package, Mic, Video, Edit, LogOut, Upload, X, Square, Image, Check, Trash2 } from "lucide-react";
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
