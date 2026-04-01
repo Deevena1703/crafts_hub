@@ -4,10 +4,12 @@ import ProductCard from "../components/ProductCard.jsx";
 import CategoryCard from "../components/CategoryCard.jsx";
 import { products, categories } from "../lib/mock-data.js";
 import { motion, AnimatePresence } from "framer-motion";
-import { ShoppingBag, Heart, Clock, ShoppingCart, Trash2, Plus, Minus, X } from "lucide-react";
+import { ShoppingBag, Heart, Clock, ShoppingCart, Trash2, Plus, Minus, X, LogOut } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const BuyerDashboard = () => {
+  const navigate = useNavigate();
   const [cart, setCart] = useState([]);
   const [cartOpen, setCartOpen] = useState(false);
 
@@ -50,11 +52,16 @@ const BuyerDashboard = () => {
               <h1 className="dashboard-title">Welcome, Buyer! 👋</h1>
               <p className="dashboard-subtitle">Explore authentic handmade products</p>
             </div>
-            <button className="btn btn-primary cart-toggle-btn" onClick={() => setCartOpen(!cartOpen)}>
-              <ShoppingCart style={{ height: '1.25rem', width: '1.25rem' }} />
-              Cart
-              {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
-            </button>
+            <div style={{ display: 'flex', gap: '0.75rem' }}>
+              <button className="btn btn-primary cart-toggle-btn" onClick={() => setCartOpen(!cartOpen)}>
+                <ShoppingCart style={{ height: '1.25rem', width: '1.25rem' }} />
+                Cart
+                {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
+              </button>
+              <button className="btn btn-outline btn-logout" onClick={() => navigate("/")}>
+                <LogOut style={{ height: '1rem', width: '1rem' }} /> Logout
+              </button>
+            </div>
           </div>
         </motion.div>
 
