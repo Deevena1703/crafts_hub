@@ -52,11 +52,16 @@ const BuyerDashboard = () => {
               <h1 className="dashboard-title">Welcome, Buyer! 👋</h1>
               <p className="dashboard-subtitle">Explore authentic handmade products</p>
             </div>
-            <button className="btn btn-primary cart-toggle-btn" onClick={() => setCartOpen(!cartOpen)}>
-              <ShoppingCart style={{ height: '1.25rem', width: '1.25rem' }} />
-              Cart
-              {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
-            </button>
+            <div style={{ display: 'flex', gap: '0.75rem' }}>
+              <button className="btn btn-primary cart-toggle-btn" onClick={() => setCartOpen(!cartOpen)}>
+                <ShoppingCart style={{ height: '1.25rem', width: '1.25rem' }} />
+                Cart
+                {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
+              </button>
+              <button className="btn btn-outline btn-logout" onClick={() => navigate("/")}>
+                <LogOut style={{ height: '1rem', width: '1rem' }} /> Logout
+              </button>
+            </div>
           </div>
         </motion.div>
 

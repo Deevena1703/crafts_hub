@@ -500,3 +500,23 @@ button { cursor: pointer; font-family: inherit; }
 .no-results { margin-top: 3rem; text-align: center; color: hsl(var(--muted-foreground)); }
 .space-y-4 > * + * { margin-top: 1rem; }
 .lucide { display: inline-block; vertical-align: middle; }
+
+/* ===== Logout Button ===== */
+.btn-logout { border-color: hsl(var(--destructive) / 0.4); color: hsl(var(--destructive)); }
+.btn-logout:hover { background: hsl(var(--destructive) / 0.1); border-color: hsl(var(--destructive)); }
+
+/* ===== Upload & Voice ===== */
+.uploaded-files { margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.5rem; }
+.uploaded-file {
+  display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0.75rem;
+  background: hsl(var(--muted)); border-radius: var(--radius); font-size: 0.8rem;
+}
+.uploaded-file-preview { width: 2.5rem; height: 2.5rem; object-fit: cover; border-radius: 0.375rem; }
+.uploaded-file-name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: hsl(var(--foreground)); }
+.recording-btn { border-color: hsl(var(--destructive) / 0.5); animation: pulse-recording 1.5s infinite; }
+@keyframes pulse-recording { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+.voice-transcript {
+  margin-top: 0.5rem; padding: 0.5rem 0.75rem; background: hsl(var(--accent) / 0.1);
+  border-radius: var(--radius); font-size: 0.8rem; color: hsl(var(--accent));
+  border-left: 3px solid hsl(var(--accent));
+}
