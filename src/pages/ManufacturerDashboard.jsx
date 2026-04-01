@@ -109,6 +109,29 @@ const ManufacturerDashboard = () => {
     resetForm();
   };
 
+  // Edit state
+  const [editingId, setEditingId] = useState(null);
+  const [editName, setEditName] = useState("");
+  const [editPrice, setEditPrice] = useState("");
+
+  const startEdit = (product) => {
+    setEditingId(product.id);
+    setEditName(product.name);
+    setEditPrice(String(product.price));
+  };
+
+  const saveEdit = (id) => {
+    if (!editName.trim() || !editPrice) return;
+    setMyProducts((prev) =>
+      prev.map((p) => p.id === id ? { ...p, name: editName, price: Number(editPrice) } : p)
+    );
+    setEditingId(null);
+  };
+
+  const deleteProduct = (id) => {
+    setMyProducts((prev) => prev.filter((p) => p.id !== id));
+  };
+
   const resetForm = () => {
     setProductName("");
     setPrice("");
