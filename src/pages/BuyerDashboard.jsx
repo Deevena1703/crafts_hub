@@ -4,8 +4,9 @@ import ProductCard from "../components/ProductCard.jsx";
 import CategoryCard from "../components/CategoryCard.jsx";
 import { products, categories } from "../lib/mock-data.js";
 import { motion, AnimatePresence } from "framer-motion";
-import { ShoppingBag, Heart, Clock, ShoppingCart, Trash2, Plus, Minus, X } from "lucide-react";
+import { ShoppingBag, Heart, Clock, ShoppingCart, Trash2, Plus, Minus, X, LogOut } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const BuyerDashboard = () => {
   const [cart, setCart] = useState([]);
