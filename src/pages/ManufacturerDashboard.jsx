@@ -2,7 +2,7 @@ import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
 import { products as initialProducts } from "../lib/mock-data.js";
 import { motion, AnimatePresence } from "framer-motion";
-import { Plus, Package, Mic, Video, Edit, LogOut, Upload, X, Square, Image } from "lucide-react";
+import { Plus, Package, Mic, Video, Edit, LogOut, Upload, X, Square, Image, Check, Trash2 } from "lucide-react";
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -107,6 +107,29 @@ const ManufacturerDashboard = () => {
 
     setMyProducts((prev) => [newProduct, ...prev]);
     resetForm();
+  };
+
+  // Edit state
+  const [editingId, setEditingId] = useState(null);
+  const [editName, setEditName] = useState("");
+  const [editPrice, setEditPrice] = useState("");
+
+  const startEdit = (product) => {
+    setEditingId(product.id);
+    setEditName(product.name);
+    setEditPrice(String(product.price));
+  };
+
+  const saveEdit = (id) => {
+    if (!editName.trim() || !editPrice) return;
+    setMyProducts((prev) =>
+      prev.map((p) => p.id === id ? { ...p, name: editName, price: Number(editPrice) } : p)
+    );
+    setEditingId(null);
+  };
+
+  const deleteProduct = (id) => {
+    setMyProducts((prev) => prev.filter((p) => p.id !== id));
   };
 
   const resetForm = () => {
@@ -248,13 +271,38 @@ const ManufacturerDashboard = () => {
           {myProducts.map((p) => (
             <div key={p.id} className="product-list-item">
               <img src={p.image} alt={p.name} className="product-list-img" />
-              <div className="product-list-info">
-                <h3 className="product-list-name">{p.name}</h3>
-                <p className="product-list-meta">{p.category} · ₹{p.price.toLocaleString("en-IN")}</p>
+              {editingId === p.id ? (
+                <div className="product-list-info product-edit-fields">
+                  <input className="form-input form-input-sm" value={editName} onChange={(e) => setEditName(e.target.value)} placeholder="Product name" />
+                  <input className="form-input form-input-sm" type="number" value={editPrice} onChange={(e) => setEditPrice(e.target.value)} placeholder="Price" />
+                </div>
+              ) : (
+                <div className="product-list-info">
+                  <h3 className="product-list-name">{p.name}</h3>
+                  <p className="product-list-meta">{p.category} · ₹{p.price.toLocaleString("en-IN")}</p>
+                </div>
+              )}
+              <div style={{ display: 'flex', gap: '0.5rem' }}>
+                {editingId === p.id ? (
+                  <>
+                    <button className="btn btn-primary btn-sm" onClick={() => saveEdit(p.id)}>
+                      <Check style={{ height: '0.75rem', width: '0.75rem' }} /> Save
+                    </button>
+                    <button className="btn btn-outline btn-sm" onClick={() => setEditingId(null)}>
+                      Cancel
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <button className="btn btn-outline btn-sm" onClick={() => startEdit(p)}>
+                      <Edit style={{ height: '0.75rem', width: '0.75rem' }} /> Edit
+                    </button>
+                    <button className="btn btn-ghost btn-sm" onClick={() => deleteProduct(p.id)}>
+                      <Trash2 style={{ height: '0.75rem', width: '0.75rem', color: 'hsl(var(--destructive))' }} />
+                    </button>
+                  </>
+                )}
               </div>
-              <button className="btn btn-outline btn-sm">
-                <Edit style={{ height: '0.75rem', width: '0.75rem' }} /> Edit
-              </button>
             </div>
           ))}
         </div>
